@@ -1,0 +1,21 @@
+{
+  "name": "playwright_automationteststore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NataliaFiryn/Playwright_AutomationTestStore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NataliaFiryn/Playwright_AutomationTestStore/issues"
+  },
+  "homepage": "https://github.com/NataliaFiryn/Playwright_AutomationTestStore#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.31.2"
+  }
+}
