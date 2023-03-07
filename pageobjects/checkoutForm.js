@@ -22,12 +22,10 @@ class CheckoutForm {
     }
     async formYourAddress(address, city, country, region_state, zip_postcode) {
         if (address !== null) await this.adressField.type(address)
-        await this.countryField.selectOption(country)
+        await this.countryField.selectOption(country, {force: true})
         if (city !== null) await this.cityField.type(city)
         if (zip_postcode !== null) await this.zip_postcodeField.type(zip_postcode)
-        if (region_state !== null) await this.region_stateField.selectOption(region_state)
-        
-        
+        if (region_state !== null) await this.region_stateField.selectOption(region_state, {force: true})
         await this.submitFormButton.click()
     }
     async confirmOrder() {
