@@ -12,6 +12,7 @@ class CheckoutForm {
         this.zip_postcodeField = page.locator('#guestFrm_postcode')
         this.submitFormButton = page.locator('#guestFrm button')
         this.confirmOrderButton = page.locator('#checkout_btn')
+        this.visibleHelpBlock = page.locator('.help-block:visible')
 
     }
     async formPersonalDetails(firstName, lastName, email) {
@@ -21,17 +22,30 @@ class CheckoutForm {
     }
     async formYourAddress(address, city, country, region_state, zip_postcode) {
         if (address !== null) await this.adressField.type(address)
-        if (city !== null) await this.cityField.type(city)
         await this.countryField.selectOption(country)
-        //statyczny wait do usunięcia! 
-        await this.page.waitForTimeout(1000)
-        if (region_state !== null) await this.region_stateField.selectOption(region_state)
+        if (city !== null) await this.cityField.type(city)
         if (zip_postcode !== null) await this.zip_postcodeField.type(zip_postcode)
+        if (region_state !== null) await this.region_stateField.selectOption(region_state)
         await this.submitFormButton.click()
     }
     async confirmOrder() {
         await this.confirmOrderButton.click()
-        await expect (this.page.locator('.maintext')).toContainText(' Your Order Has Been Processed!')
+        await expect(this.page.locator('.maintext')).toContainText(' Your Order Has Been Processed!')
+    }
+    async addressValidationMessage() {
+        await expect(this.visibleHelpBlock).toContainText('Address 1 must be greater than 3 and less than 128 characters!')
+    }
+    async cityValidationMessage() {
+        await expect(this.visibleHelpBlock).toContainText('City must be greater than 3 and less than 128 characters!')
+    }
+    async region_stateValidationMessage() {
+        await expect(this.visibleHelpBlock).toContainText('Please select a region / state!')
+    }
+    async zip_postecodeValidationMessage() {
+        await expect(this.visibleHelpBlock).toContainText('Zip/postal code must be between 3 and 10 characters!')
+    }
+    async countryValidationMessage() {
+        await expect(this.visibleHelpBlock).toContainText('Please select a country!')
     }
 }
 module.exports = { CheckoutForm };

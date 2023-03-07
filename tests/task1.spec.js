@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test } = require('@playwright/test');
 const { PageObjectsManager } = require('../pageobjects/pageObjectsManager')
 
 test.describe('Add to card 3 products and order', () => {
