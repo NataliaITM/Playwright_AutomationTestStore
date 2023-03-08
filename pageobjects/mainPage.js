@@ -1,4 +1,3 @@
-const { expect } = require('@playwright/test');
 class MainPage {
     constructor(page) {
         this.page = page;
@@ -8,14 +7,12 @@ class MainPage {
         this.cartIcon = page.locator('[class="fa fa-cart-plus fa-fw"]')
         this.addToCartButton = page.locator('.cart')
         this.allProductsOnPage = page.locator('[class="col-md-3 col-sm-6 col-xs-12"]')
-
-
-
+        this.sortingWell = page.locator('#sort')
     }
     async addProductToCartByUsingSearchBox(product) {
         await this.searchBox.type(product)
         await this.searchButton.click()
-        if (await this.page.locator('#sort').count() > 0) {
+        if (await this.sortingWell.count() > 0) {
             await this.cartIcon.nth(0).click()
         }
         await this.addToCartButton.click()
@@ -25,8 +22,10 @@ class MainPage {
         await this.page.locator('text =    T-shirts').nth(0).click()
         const count = await this.allProductsOnPage.count()
         for (let i = 0; i < count; ++i) {
-            if (await this.allProductsOnPage.nth(i).locator('.prdocutname').textContent() === productName) {
-                await this.allProductsOnPage.nth(i).locator('.productcart').click()
+            const product = this.allProductsOnPage.nth(i)
+            const productNameElement = await product.locator('.prdocutname').textContent()
+            if (productNameElement === productName) {
+                await product.locator('.productcart').click()
                 break
             }
         }
@@ -37,8 +36,10 @@ class MainPage {
         await this.page.locator('text =    Shoes').nth(0).click()
         const count = await this.allProductsOnPage.count()
         for (let i = 0; i < count; ++i) {
-            if (await this.allProductsOnPage.nth(i).locator('.prdocutname').textContent() === productName) {
-                await this.allProductsOnPage.nth(i).locator('.productcart').click()
+            const product = this.allProductsOnPage.nth(i)
+            const productNameElement = await product.locator('.prdocutname').textContent()
+            if (productNameElement === productName) {
+                await product.locator('.productcart').click()
                 break
             }
         }
@@ -47,6 +48,5 @@ class MainPage {
         }
         await this.addToCartButton.click()
     }
-
 }
 module.exports = { MainPage };

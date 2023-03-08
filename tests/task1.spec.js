@@ -15,7 +15,7 @@ test.describe('Add to card 3 products and order', () => {
         await mainPage.addShoesToCart('New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals')
         await cartPage.checkoutAsGuest()
         await checkoutForm.formPersonalDetails('Herkules', 'Poirot', 'Poirot@example.com')
-        await checkoutForm.formYourAddress('Whitehaven Mansion','London','United Kingdom','Greater London', 'E1 7AY')
+        await checkoutForm.formYourAddress('Whitehaven Mansion', 'London', 'United Kingdom', 'Greater London', 'E1 7AY')
         await checkoutForm.confirmOrder()
     });
 });

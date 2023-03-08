@@ -12,8 +12,8 @@ class CheckoutForm {
         this.zip_postcodeField = page.locator('#guestFrm_postcode')
         this.submitFormButton = page.locator('#guestFrm button')
         this.confirmOrderButton = page.locator('#checkout_btn')
+        this.confirmOrderSuccesText= page.locator('.maintext')
         this.visibleHelpBlock = page.locator('.help-block:visible')
-
     }
     async formPersonalDetails(firstName, lastName, email) {
         await this.firstNameField.type(firstName)
@@ -32,7 +32,7 @@ class CheckoutForm {
     }
     async confirmOrder() {
         await this.confirmOrderButton.click()
-        await expect(this.page.locator('.maintext')).toContainText(' Your Order Has Been Processed!')
+        await expect (this.confirmOrderSuccesText).toContainText(' Your Order Has Been Processed!')
     }
     async addressValidationMessage() {
         await expect(this.visibleHelpBlock).toContainText('Address 1 must be greater than 3 and less than 128 characters!')

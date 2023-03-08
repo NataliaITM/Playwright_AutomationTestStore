@@ -8,6 +8,7 @@ class CartPage {
         this.checkoutButton = page.locator('#cart_checkout1')
         this.guestCheckoutOption = page.locator('#accountFrm_accountguest')
         this.continueCheckoutButton = page.locator('[title="Continue"]')
+        this.totalsTableElements = this.page.locator('#totals_table td')
     }
     async topCartIsEmpty() {
         await expect(this.topCartTotalPrice).toContainText('0.00')
@@ -18,7 +19,7 @@ class CartPage {
         expect(await this.topCartTotalQuantity).not.toContain('0')
     }
     async priceInCardMatchPriceInTopCard() {
-        const subtotalPrice = await this.page.locator('.bold ').nth(1).textContent()
+        const subtotalPrice = await (this.totalsTableElements).nth(1).textContent()
         await expect(this.topCartTotalPrice).toHaveText(subtotalPrice)
     }
     async checkoutAsGuest() {
