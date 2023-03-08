@@ -12,7 +12,7 @@ class CheckoutForm {
         this.zip_postcodeField = page.locator('#guestFrm_postcode')
         this.submitFormButton = page.locator('#guestFrm button')
         this.confirmOrderButton = page.locator('#checkout_btn')
-        this.confirmOrderSuccesText= page.locator('.maintext')
+        this.confirmOrderSuccesText = page.locator('.maintext')
         this.visibleHelpBlock = page.locator('.help-block:visible')
     }
     async formPersonalDetails(firstName, lastName, email) {
@@ -21,18 +21,26 @@ class CheckoutForm {
         await this.emailField.type(email)
     }
     async formYourAddress(address, city, country, region_state, zip_postcode) {
-        if (address !== null) await this.adressField.type(address)
-        await this.countryField.selectOption(country, {force: true})
-        if (city !== null) await this.cityField.type(city)
-        await this.page.waitForTimeout(1000)
-        if (zip_postcode !== null) await this.zip_postcodeField.type(zip_postcode)
-        if (region_state !== null) await this.region_stateField.selectOption(region_state, {force: true})
-        await this.page.waitForTimeout(1000)
+        if (address) {
+            await this.adressField.type(address)
+        }
+        if (country) {
+            await this.countryField.selectOption(country)
+        }
+        if (city) {
+            await this.cityField.type(city)
+        }
+        if (zip_postcode) {
+            await this.zip_postcodeField.type(zip_postcode)
+        }
+        if (region_state) {
+            await this.region_stateField.selectOption(region_state)
+        }
         await this.submitFormButton.click()
     }
     async confirmOrder() {
         await this.confirmOrderButton.click()
-        await expect (this.confirmOrderSuccesText).toContainText(' Your Order Has Been Processed!')
+        await expect(this.confirmOrderSuccesText).toContainText(' Your Order Has Been Processed!')
     }
     async addressValidationMessage() {
         await expect(this.visibleHelpBlock).toContainText('Address 1 must be greater than 3 and less than 128 characters!')
