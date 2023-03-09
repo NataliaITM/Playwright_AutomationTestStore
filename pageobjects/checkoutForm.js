@@ -33,9 +33,13 @@ class CheckoutForm {
         if (zip_postcode) {
             await this.zip_postcodeField.type(zip_postcode)
         }
+        await this.page.pause()
         if (region_state) {
-            console.log('state_region')
+            await this.region_stateField.click()
+            //await this.page.locator('[value="3525"]').first().forceClick()
+            //await this.page.locator('text='+region_state).first().click({force:true})
             await this.region_stateField.selectOption(region_state)
+            await this.region_stateField.click()
         }
         await this.submitFormButton.click()
     }
