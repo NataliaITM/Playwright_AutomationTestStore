@@ -34,8 +34,7 @@ class CartPage {
             const value = await this.cartAllProductsQuantity.nth(i).getAttribute('value')
             counter = counter + parseInt(value)
         }
-        counter = counter.toString()
-        await expect(this.topCartTotalQuantity).toContainText(counter)
+        await expect(this.topCartTotalQuantity).toContainText(counter.toString())
     }
 }
 module.exports = { CartPage };

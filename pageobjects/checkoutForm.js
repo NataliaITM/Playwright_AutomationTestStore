@@ -33,16 +33,10 @@ class CheckoutForm {
         if (zip_postcode) {
             await this.zip_postcodeField.type(zip_postcode)
         }
-        await this.page.pause()
         if (region_state) {
             await this.region_stateField.click()
-            //await this.page.locator('[value="3525"]').first().forceClick()
-            //await this.page.locator('text='+region_state).first().click({force:true})
-            // await this.region_stateField.selectOption(region_state)
-            const keyboard = this.page.keyboard
-            await keyboard.type(region_state)
-            await keyboard.press('Enter')
-
+            await this.page.keyboard.type(region_state)
+            await this.page.keyboard.press('Enter')
         }
         await this.submitFormButton.click()
     }
