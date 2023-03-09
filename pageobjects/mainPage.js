@@ -1,3 +1,6 @@
+const productNameClassName = '.prdocutname'
+const productCartClassName = '.productcart'
+
 class MainPage {
     constructor(page) {
         this.page = page;
@@ -23,9 +26,9 @@ class MainPage {
         const count = await this.allProductsOnPage.count()
         for (let i = 0; i < count; ++i) {
             const product = this.allProductsOnPage.nth(i)
-            const productNameElement = await product.locator('.prdocutname').textContent()
+            const productNameElement = await product.locator(productNameClassName).textContent()
             if (productNameElement === productName) {
-                await product.locator('.productcart').click()
+                await product.locator(productCartClassName).click()
                 break
             }
         }
@@ -37,9 +40,9 @@ class MainPage {
         const count = await this.allProductsOnPage.count()
         for (let i = 0; i < count; ++i) {
             const product = this.allProductsOnPage.nth(i)
-            const productNameElement = await product.locator('.prdocutname').textContent()
+            const productNameElement = await product.locator(productNameClassName).textContent()
             if (productNameElement === productName) {
-                await product.locator('.productcart').click()
+                await product.locator(productCartClassName).click()
                 break
             }
         }
