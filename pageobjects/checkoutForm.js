@@ -34,6 +34,7 @@ class CheckoutForm {
             await this.zip_postcodeField.type(zip_postcode)
         }
         if (region_state) {
+            console.log('state_region')
             await this.region_stateField.selectOption(region_state)
         }
         await this.submitFormButton.click()
